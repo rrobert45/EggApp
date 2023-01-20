@@ -18,12 +18,27 @@ pin = 4
 relay = 17
 
 # Set the interval for logging data and turning on the relay (in seconds)
-log_interval = 600 # 10 minutes
+log_interval = 600 # 5 minutes
 relay_interval = 14400 # 4 hours
 
 # Initialize the GPIO pin for the relay
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(relay, GPIO.OUT)
+
+# Open the CSV files for writing
+temp_humidity_file = open('temp_humidity_data.csv', 'w', newline='')
+temp_humidity_writer = csv.writer(temp_humidity_file)
+temp_humidity_writer.writerow(['Time', 'Temperature(F)', 'Humidity(%)'])
+
+relay_file = open('relay_data.csv', 'w', newline='')
+relay_writer = csv.writer(relay_file)
+relay_writer.writerow(['Time', 'Relay Status'])
+# Store the time when the relay was last turned on
+last_relay_on = time.time()
+
+# Global variables to store the temperature and humidity values
+global temperature
+global humidity
 
 data_queue = Queue()
 
@@ -39,9 +54,9 @@ def read_sensor_data():
 
 def log_data(temperature, humidity, relay_status):
     # Log the temperature and humidity data
-    temp_humidity_writer.writerow([time.strftime("%m-%d-%Y %H:%M:%S"), temperature, humidity])
+    temp_humidity_writer.writerow([time.strftime("%Y-%m-%d %H:%M:%S"), temperature, humidity])
     temp_humidity_file.flush()
-    relay_writer.writerow([time.strftime("%m-%d-%Y %H:%M:%S"), relay_status])
+    relay_writer.writerow([time.strftime("%Y-%m-%d %H:%M:%S"), relay_status])
     relay_file.flush()
     
 
