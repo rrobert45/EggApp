@@ -1,4 +1,4 @@
-fetch("/home/robert/Desktop/EggApp/temp_humidity_data.csv")
+fetch("/static/temp_humidity_data.csv")
 .then(response => response.text())
 .then(data => {
     // Split the CSV data into rows
