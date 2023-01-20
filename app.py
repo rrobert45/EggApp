@@ -18,7 +18,7 @@ pin = 4
 relay = 17
 
 # Set the interval for logging data and turning on the relay (in seconds)
-log_interval = 300 # 5 minutes
+log_interval = 600 # 5 minutes
 relay_interval = 14400 # 4 hours
 
 # Initialize the GPIO pin for the relay
@@ -58,6 +58,7 @@ def log_data(temperature, humidity, relay_status):
     temp_humidity_file.flush()
     relay_writer.writerow([time.strftime("%Y-%m-%d %H:%M:%S"), relay_status])
     relay_file.flush()
+    temp_humidity_file.close()
 
 def check_relay():
     global last_relay_on
