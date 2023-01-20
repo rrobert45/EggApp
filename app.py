@@ -58,7 +58,7 @@ def log_data(temperature, humidity, relay_status):
     temp_humidity_file.flush()
     relay_writer.writerow([time.strftime("%Y-%m-%d %H:%M:%S"), relay_status])
     relay_file.flush()
-    temp_humidity_file.close()
+    
 
 def check_relay():
     global last_relay_on
@@ -83,6 +83,7 @@ def read_and_log_data():
             data_queue.put((temperature, humidity, last_relay_on))
             log_data(temperature, humidity, last_relay_on)
             check_relay()
+            temp_humidity_file.close()
             time.sleep(log_interval)
     except KeyboardInterrupt:
         pass
