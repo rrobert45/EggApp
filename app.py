@@ -51,7 +51,7 @@ def read_sensor_data():
 
 def log_data(temperature, humidity):
     # Create a dataframe from the data
-    data = {'Time': [time.strftime("%Y-%m-%d %H:%M:%S")], 'Temperature(F)': [temperature], 'Humidity(%)': [humidity]}
+    data = {'Time': [time.strftime("%m-%d-%Y %H:%M:%S")], 'Temperature(F)': [temperature], 'Humidity(%)': [humidity]}
     df = pd.DataFrame(data)
     
     # Append the data to the CSV file
@@ -74,7 +74,7 @@ def check_relay():
 
 def log_relay_data(status):
     # Create a pandas DataFrame with the current relay data
-    data = {'Time': [time.strftime("%Y-%m-%d %H:%M:%S")], 'Relay Status': [status]}
+    data = {'Time': [time.strftime("%m-%d-%Y %H:%M:%S")], 'Relay Status': [status]}
     df = pd.DataFrame(data)
     
     # Append the data to the CSV file
@@ -100,7 +100,7 @@ def index():
     thread = Thread(target=read_and_log_data)
     thread.start()
     temperature, humidity = data_queue.get()
-    last_relay_on_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(last_relay_on))
+    last_relay_on_time = time.strftime("%m-%d-%Y %H:%M:%S", time.localtime(last_relay_on))
    
     # Fetch the data from the CSV file
     df = pd.read_csv("temp_humidity_data.csv", names=["Time", "Temperature(F)", "Humidity(%)"])
