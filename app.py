@@ -44,8 +44,8 @@ def read_sensor_data():
         print('Failed to read data from sensor')
         return None, None
 
-def log_data():
-    # Create a pandas DataFrame with the current sensor data
+def log_data(temperature, humidity):
+    # Create a dataframe from the data
     data = {'Time': [time.strftime("%Y-%m-%d %H:%M:%S")], 'Temperature(F)': [temperature], 'Humidity(%)': [humidity]}
     df = pd.DataFrame(data)
     
