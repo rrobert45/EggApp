@@ -100,7 +100,7 @@ def index():
     last_relay_on_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(last_relay_on))
    
     # Fetch the data from the CSV file
-    df = pd.read_csv("temp_humidity_data.csv", header=None, names=["Time", "Temperature(F)", "Humidity(%)"], mode='a')
+    df = pd.read_csv("temp_humidity_data.csv", header=None, names=["Time", "Temperature(F)", "Humidity(%)"])
 
     # Format the data for the graph
     x_data = df["Time"].tolist()
