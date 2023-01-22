@@ -109,8 +109,8 @@ def index():
     x_data = df["Time"].tolist()
     y_data = df["Temperature(F)"].tolist()
     humidity_data = df["Humidity(%)"].tolist()
-    return render_template("index.html", x_data=json.dumps(x_data), y_data=json.dumps(y_data), humidity_data=json.dumps(humidity_data), temperature=temperature, humidity=humidity, last_relay_on=last_relay_on_time)
+    return render_template("index.html", x_data=x_data, y_data=y_data, humidity_data=humidity_data, temperature=temperature, humidity=humidity, last_relay_on=last_relay_on_time)
 
-    
+
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0')
