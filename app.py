@@ -5,9 +5,8 @@ import Adafruit_DHT
 import RPi.GPIO as GPIO
 from threading import Thread
 from queue import Queue
-import datetime
 import os
-import json
+
 
 
 
@@ -110,6 +109,8 @@ def index():
     y_data = df["Temperature(F)"].tolist()
     humidity_data = df["Humidity(%)"].tolist()
     return render_template("index.html", x_data=x_data, y_data=y_data, humidity_data=humidity_data, temperature=temperature, humidity=humidity, last_relay_on=last_relay_on_time)
+
+
 
 
 if __name__ == "__main__":
