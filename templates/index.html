@@ -1,33 +1,71 @@
-Copy code
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Egg Incubator</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  </head>
-  <body>
-    <div class="container">
-      <h1>Egg Incubator</h1>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Time</th>
-            <th>Temperature (F)</th>
-            <th>Humidity (%)</th>
-            <th>Relay Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for row in data %}
-          <tr>
-            <td>{{ row.Time }}</td>
-            <td>{{ row.Temperature }}</td>
-            <td>{{ row.Humidity }}</td>
-            <td>{{ row.Relay_Status }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+<head>
+  <title>Temperature and Humidity Monitor</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body class="dark-theme">
+  <div class="current-data">
+    <h1>Current Data</h1>
+    <div class="data-row">
+      <div class="data-label">Temperature:</div>
+      <div class="data-value">{{ temperature }} F</div>
     </div>
-  </body>
+    <div class="data-row">
+      <div class="data-label">Humidity:</div>
+      <div class="data-value">{{ humidity }} %</div>
+    </div>
+    <div class="data-row">
+      <div class="data-label">Last Relay On Time:</div>
+      <div class="data-value">{{ last_relay_on }}</div>
+    </div>
+  </div>
+  <div id="graph"></div>
+  <script>
+    // Code to generate the historical data graph using Plotly
+    var data = [{
+      x: {{ x_data }},
+      y: {{ y_data }},
+      type: 'scatter',
+      mode: 'lines+markers',
+      line: {
+        color: 'rgb(255, 255, 255)',
+        width: 2
+      }
+    }];
+    var layout = {
+      xaxis: {
+        title: 'Time',
+        showgrid: true,
+        zeroline: true,
+        showline: true,
+        gridcolor: 'rgb(255, 255, 255)',
+        linecolor: 'rgb(255, 255, 255)',
+        zerolinecolor: 'rgb(255, 255, 255)',
+        tickfont: {
+          color: 'rgb(255, 255, 255)'
+        }
+      },
+      yaxis: {
+        title: 'Temperature (F)',
+        showgrid: true,
+        zeroline: true,
+        showline: true,
+        gridcolor: 'rgb(255, 255, 255)',
+        linecolor: 'rgb(255, 255, 255)',
+        zerolinecolor: 'rgb(255, 255, 255)',
+        tickfont: {
+          color: 'rgb(255, 255, 255)'
+        }
+      },
+      paper_bgcolor: 'rgb(50, 50, 50)',
+      plot_bgcolor: 'rgb(50, 50, 50)',
+      font: {
+        color: 'rgb(255, 255, 255)'
+      }
+    };
+    Plotly.newPlot('graph', data, layout);
+  </script>
+</body>
 </html>

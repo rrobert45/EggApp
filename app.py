@@ -95,7 +95,8 @@ def index():
     thread = Thread(target=read_and_log_data)
     thread.start()
     temperature, humidity = data_queue.get()
-    return render_template('index.html', temperature=temperature, humidity=humidity)
+    last_relay_on_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(last_relay_on))
+    return render_template('index.html', temperature=temperature, humidity=humidity, last_relay_on=last_relay_on_time)
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0')
