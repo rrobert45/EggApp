@@ -22,7 +22,7 @@ pin = 4
 relay = 17
 
 # Set the interval for logging data and turning on the relay (in seconds)
-log_interval = 600 # 5 minutes
+log_interval = 1800 # 5 minutes
 relay_interval = 14400 # 4 hours
 
 # Initialize the GPIO pin for the relay
@@ -67,9 +67,8 @@ def check_relay():
         time.sleep(120)
         GPIO.output(relay, GPIO.LOW)
         log_relay_data("OFF")
-        print("relay has been turned on")
     else:
-        log_relay_data("OFF")
+        pass
 
 def log_relay_data(status):
     # Create a pandas DataFrame with the current relay data
