@@ -1,25 +1,33 @@
+Copy code
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Temperature and Humidity</title>
-    <style>
-        body {
-            background-color: #1c1c1c;
-            color: #fff;
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-        h1 {
-            margin-top: 50px;
-        }
-    </style>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-</head>
-<body>
-    <h1>Temperature: {{ temperature }} F</h1>
-    <h1>Humidity: {{ humidity }} %</h1>
-    <h1>Last Egg Roll: {{ last_relay_on }}</h1>
-    <canvas id="tempChart"></canvas>
-    "<script src="/static/chart.js"></script>"></script>
-</body>
+  <head>
+    <title>Egg Incubator</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Egg Incubator</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Temperature (F)</th>
+            <th>Humidity (%)</th>
+            <th>Relay Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in data %}
+          <tr>
+            <td>{{ row.Time }}</td>
+            <td>{{ row.Temperature }}</td>
+            <td>{{ row.Humidity }}</td>
+            <td>{{ row.Relay_Status }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </body>
 </html>
