@@ -8,7 +8,7 @@ from queue import Queue
 import datetime
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
 
 # Set the sensor type (DHT22) and the GPIO pin number
 sensor = Adafruit_DHT.DHT22
@@ -96,7 +96,15 @@ def index():
     thread.start()
     temperature, humidity = data_queue.get()
     last_relay_on_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(last_relay_on))
-    return render_template('index.html', temperature=temperature, humidity=humidity, last_relay_on=last_relay_on_time)
+   
+    # Fetch the data from the CSV file
+    df = pd.read_csv("temp_humidity_data.csv", names=["Time", "Temperature(F)", "Humidity(%)"])
+
+    # Format the data for the graph
+    x_data = df["Time"].tolist()
+    y_data = df["Temperature(F)"].tolist()
+
+    return render_template('index.html', temperature=temperature, humidity=humidity, last_relay_on=last_relay_on_time, x_data=x_data, y_data=y_data)
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0')
