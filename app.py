@@ -92,7 +92,7 @@ def read_and_log_data():
         # Clean up the GPIO pins
         GPIO.cleanup()
 
-@app.route("/")
+app.route("/")
 def index():
     thread = Thread(target=read_and_log_data)
     thread.start()
@@ -100,7 +100,7 @@ def index():
     last_relay_on_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(last_relay_on))
    
     # Fetch the data from the CSV file
-    df = pd.read_csv("temp_humidity_data.csv", header=None, names=["Time", "Temperature(F)", "Humidity(%)"])
+    df = pd.read_csv("temp_humidity_data.csv",names=["Time", "Temperature(F)", "Humidity(%)"])
 
     # Format the data for the graph
     x_data = df["Time"].tolist()
@@ -109,4 +109,4 @@ def index():
     return render_template('index.html', temperature=temperature, humidity=humidity, last_relay_on=last_relay_on_time, x_data=x_data, y_data=y_data)
 
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=True, host='0.0.0.0')@
