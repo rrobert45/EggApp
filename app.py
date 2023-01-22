@@ -109,4 +109,4 @@ def index():
     return render_template('index.html', temperature=temperature, humidity=humidity, last_relay_on=last_relay_on_time, x_data=x_data, y_data=y_data)
 
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0')@
+    app.run(debug=True, host='0.0.0.0')
