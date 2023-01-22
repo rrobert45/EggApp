@@ -54,9 +54,10 @@
   <div id="graph"></div>
   <script>
     // Code to generate the historical data graph using Plotly
-    var x_data = {{ x_data }};
-    var y_data = {{ y_data }};
-    var humidity_data = {{ humidity_data }};
+    var x_data = JSON.parse('{{ x_data }}');
+    var y_data = JSON.parse('{{ y_data }}');
+    var humidity_data = JSON.parse('{{ humidity_data }}');
+
 
     var data = [
         {
