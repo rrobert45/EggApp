@@ -6,7 +6,9 @@ import RPi.GPIO as GPIO
 from threading import Thread
 from queue import Queue
 import datetime
+import os
 
+print(os.getcwd())
 
 app = Flask(__name__, static_folder='static')
 
