@@ -55,7 +55,7 @@
   <script>
     // Code to generate the historical data graph using Plotly
     var data = [{
-      x: {{ x_data }},
+      x: JSON.parse({{ x_data }}),
       y: {{ y_data }},
       type: 'scatter',
       mode: 'lines+markers',
