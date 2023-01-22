@@ -105,8 +105,9 @@ def index():
     # Format the data for the graph
     x_data = df["Time"].tolist()
     y_data = df["Temperature(F)"].tolist()
+    humidity_data = df["Humidity(%)"].tolist()
 
-    return render_template('index.html', temperature=temperature, humidity=humidity, last_relay_on=last_relay_on_time, x_data=x_data, y_data=y_data)
+    return render_template('index.html', temperature=temperature, humidity=humidity, last_relay_on=last_relay_on_time, x_data=x_data, y_data=y_data, humidity_data=humidity_data)
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0')

@@ -54,16 +54,36 @@
   <div id="graph"></div>
   <script>
     // Code to generate the historical data graph using Plotly
-    var data = [{
-      x: JSON.parse({{ x_data }}),
-      y: {{ y_data }},
-      type: 'scatter',
-      mode: 'lines+markers',
-      line: {
-        color: 'rgb(255, 255, 255)',
-        width: 2
-      }
-    }];
+    var x_data = {{ x_data }};
+    var y_data = {{ y_data }};
+    var humidity_data = {{ humidity_data }};
+
+    var data = [
+        {
+          x: x_data,
+          y: y_data,
+          type: 'scatter',
+          mode: 'lines+markers',
+          line: {
+            color: 'rgb(255, 255, 255)',
+            width: 2
+          },
+          name: 'Temperature'
+        },
+        {
+          x: x_data,
+          y: humidity_data,
+          type: 'scatter',
+          mode: 'lines+markers',
+          line: {
+            color: 'rgb(255, 0, 0)',
+            width: 2
+          },
+          name: 'Humidity',
+          yaxis: 'y2'
+        }
+      ];
+
     var layout = {
       xaxis: {
         title: 'Time',
@@ -89,6 +109,22 @@
           color: 'rgb(255, 255, 255)'
         }
       },
+      yaxis2: {
+        title: 'Humidity(%)',
+        showgrid: true,
+        zeroline: true,
+        showline: true,
+        gridcolor: 'rgb(255, 255, 255)',
+        linecolor: 'rgb(255, 255, 255)',
+        zerolinecolor: 'rgb(255, 255, 255)',
+        tickfont: {
+            color: 'rgb(255, 255, 255)'
+            },
+            overlaying: 'y',
+            side: 'right'
+        },
+
+
       paper_bgcolor: 'rgb(50, 50, 50)',
       plot_bgcolor: 'rgb(50, 50, 50)',
       font: {
