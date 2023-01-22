@@ -7,6 +7,9 @@ from threading import Thread
 from queue import Queue
 import datetime
 import os
+from flask import jsonify
+
+
 
 print(os.getcwd())
 
@@ -106,8 +109,7 @@ def index():
     x_data = df["Time"].tolist()
     y_data = df["Temperature(F)"].tolist()
     humidity_data = df["Humidity(%)"].tolist()
-
-    return render_template('index.html', temperature=temperature, humidity=humidity, last_relay_on=last_relay_on_time, x_data=x_data, y_data=y_data, humidity_data=humidity_data)
+    return render_template("index.html", x_data=jsonify(x_data), y_data=jsonify(y_data), humidity_data=jsonify(humidity_data), temperature=temperature, humidity=humidity, last_relay_on=last_relay_on_time)
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0')
